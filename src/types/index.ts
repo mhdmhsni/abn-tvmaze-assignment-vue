@@ -19,3 +19,5 @@ export interface Show {
   network: { name: string } | null
   webChannel: { name: string } | null
 }
+
+export type FetchStatus = 'idle' | 'loading' | 'error' | 'success'
