@@ -1,0 +1,57 @@
+:root {
+  // Colors — Light Theme
+  --color-bg: #f0f2f5;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #ffffff;
+  --color-text: #1a1a2e;
+  --color-text-muted: #64748b;
+  --color-accent: #e50914;
+  --color-accent-hover: #c4070f;
+  --color-rating: #f5c518;
+  --color-border: #e2e8f0;
+  --color-shadow: rgba(0, 0, 0, 0.08);
+  --color-shadow-hover: rgba(0, 0, 0, 0.16);
+  --color-placeholder: #cbd5e1;
+
+  // Layout
+  --header-height: 64px;
+  --container-max: 1400px;
+  --page-padding: 24px;
+
+  // Cards
+  --card-width: 160px;
+  --card-height: 240px;
+  --card-radius: 8px;
+  --card-gap: 16px;
+
+  // Typography
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+
+  // Transitions
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+
+  // Border radius
+  --radius-sm: 4px;
+  --radius-base: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+}
+
+[data-theme='dark'] {
+  --color-bg: #0d0d0d;
+  --color-surface: #1a1a1a;
+  --color-surface-elevated: #252525;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-border: #2a2a2a;
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-shadow-hover: rgba(0, 0, 0, 0.5);
+  --color-placeholder: #2a2a2a;
+}
