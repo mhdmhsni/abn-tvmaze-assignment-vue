@@ -1,0 +1,21 @@
+export interface Rating {
+  average: number
+}
+
+export interface Image {
+  medium: string
+  original: string
+}
+
+export interface Show {
+  id: number
+  name: string
+  genres: string[]
+  status: string
+  rating: Rating
+  image: Image | null
+  summary: string | null
+  premiered: string | null
+  network: { name: string } | null
+  webChannel: { name: string } | null
+}
