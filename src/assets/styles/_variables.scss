@@ -10,8 +10,10 @@
   --color-rating: #f5c518;
   --color-border: #e2e8f0;
   --color-shadow: rgba(0, 0, 0, 0.08);
-  --color-shadow-hover: rgba(0, 0, 0, 0.16);
+  --color-shadow-hover: rgba(0, 0, 0, 0.22);
   --color-placeholder: #cbd5e1;
+  --color-status-running: #1a73e8;
+  --color-status-ended: #64748b;
 
   // Layout
   --header-height: 64px;
@@ -19,19 +21,19 @@
   --page-padding: 24px;
 
   // Cards
-  --card-width: 160px;
-  --card-height: 240px;
-  --card-radius: 8px;
+  --card-width: 200px;
+  --card-height: 300px;
+  --card-radius: 10px;
   --card-gap: 16px;
 
-  // Typography
-  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
+  // Typography — base 18px (1.125rem)
+  --font-family: 'Google Sans Flex', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-size-xs: 0.8125rem;
+  --font-size-sm: 1rem;
+  --font-size-base: 1.125rem;
+  --font-size-lg: 1.3125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 1.875rem;
 
   // Transitions
   --transition-fast: 150ms ease;
