@@ -1,6 +1,6 @@
 import type { Show, CastMember, Season, ShowImage } from '@/types'
 
-const BASE_URL = 'https://api.tvmaze.com'
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 export async function getShows(page: number): Promise<Show[]> {
   const response = await fetch(`${BASE_URL}/shows?page=${page}`)
