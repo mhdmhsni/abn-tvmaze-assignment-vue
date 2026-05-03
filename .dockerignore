@@ -1,0 +1,16 @@
+node_modules
+dist
+dist-ssr
+coverage
+.git
+.gitignore
+.eslintcache
+*.local
+*.log
+tmp
+__screenshots__
+.DS_Store
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
