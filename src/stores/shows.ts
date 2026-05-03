@@ -45,8 +45,8 @@ export const useShowsStore = defineStore('shows', () => {
       } else {
         shows.value.push(...newShows)
         currentPage.value++
-        status.value = 'success'
       }
+      status.value = 'success'
     } catch (e) {
       error.value = e instanceof Error ? e.message : 'Failed to load shows'
       status.value = 'error'

@@ -1,11 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useThemeStore } from './stores/theme'
+import { onMounted } from 'vue'
+import AppHeader from '@/components/layout/AppHeader.vue'
+
+const themeStore = useThemeStore()
+onMounted(() => themeStore.initTheme())
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <AppHeader />
+  <RouterView />
 </template>
 
 <style scoped></style>

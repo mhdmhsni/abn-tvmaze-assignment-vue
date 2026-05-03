@@ -1,5 +1,5 @@
 export interface Rating {
-  average: number
+  average: number | null
 }
 
 export interface Image {

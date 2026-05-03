@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-const Storage_KEY = 'theme'
+const STORAGE_KEY = 'tvmaze-theme'
 
 export const useThemeStore = defineStore('theme', () => {
   const isDark = ref(false)
 
   function initTheme(): void {
-    const saved = localStorage.getItem(Storage_KEY)
+    const saved = localStorage.getItem(STORAGE_KEY)
     isDark.value = saved
       ? saved === 'dark'
       : window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -16,7 +16,7 @@ export const useThemeStore = defineStore('theme', () => {
 
   function toggleTheme(): void {
     isDark.value = !isDark.value
-    localStorage.setItem(Storage_KEY, isDark.value ? 'dark' : 'light')
+    localStorage.setItem(STORAGE_KEY, isDark.value ? 'dark' : 'light')
     applyTheme()
   }
 
