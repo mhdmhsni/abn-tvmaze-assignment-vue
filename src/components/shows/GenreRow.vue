@@ -7,13 +7,20 @@ defineProps<{
   genre: string
   shows: Show[]
 }>()
+
+const emit = defineEmits<{ select: [id: number] }>()
 </script>
 
 <template>
   <section class="genre-row">
     <h2 class="genre-row__title">{{ genre }}</h2>
     <HorizontalScroller class="genre-row__scroll-wrap">
-      <ShowCard v-for="show in shows.slice(0, 20)" :key="show.id" :show="show" />
+      <ShowCard
+        v-for="show in shows.slice(0, 20)"
+        :key="show.id"
+        :show="show"
+        @select="(id) => emit('select', id)"
+      />
     </HorizontalScroller>
   </section>
 </template>

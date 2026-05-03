@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { searchShows } from '@/api/tvmaze'
 import type { Show, FetchStatus } from '@/types'
 import ShowCard from '@/components/shows/ShowCard.vue'
@@ -8,6 +8,7 @@ import LoadingSpinner from '@/components/common/LoadingSpinner.vue'
 import ErrorMessage from '@/components/common/ErrorMessage.vue'
 
 const route = useRoute()
+const router = useRouter()
 
 const results = ref<Show[]>([])
 const status = ref<FetchStatus>('idle')
@@ -56,7 +57,12 @@ watch(
     <template v-else-if="status === 'success'">
       <p v-if="results.length === 0" class="search-page__empty">No shows found.</p>
       <div v-else class="search-page__grid">
-        <ShowCard v-for="show in results" :key="show.id" :show="show" />
+        <ShowCard
+          v-for="show in results"
+          :key="show.id"
+          :show="show"
+          @select="(id) => router.push(`/show/${id}`)"
+        />
       </div>
     </template>
   </main>

@@ -47,6 +47,7 @@ function goToPage(page: number) {
         :key="genre"
         :genre="genre"
         :shows="showsStore.showsByGenre.get(genre) ?? []"
+        @select="(id) => router.push(`/show/${id}`)"
       />
     </template>
 

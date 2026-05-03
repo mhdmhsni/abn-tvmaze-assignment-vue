@@ -1,14 +1,9 @@
 <script setup lang="ts">
 import type { Show } from '@/types'
-import { useRouter } from 'vue-router'
 import RatingBadge from '@/components/common/RatingBadge.vue'
 
 const props = defineProps<{ show: Show }>()
-const router = useRouter()
-
-function navigate() {
-  router.push(`/show/${props.show.id}`)
-}
+const emit = defineEmits<{ select: [id: number] }>()
 </script>
 
 <template>
@@ -17,8 +12,8 @@ function navigate() {
     role="button"
     tabindex="0"
     :aria-label="`${props.show.name}, rated ${props.show.rating.average ?? 'N/A'}`"
-    @click="navigate"
-    @keydown.enter="navigate"
+    @click="emit('select', props.show.id)"
+    @keydown.enter="emit('select', props.show.id)"
   >
     <img
       v-if="props.show.image"

@@ -1,7 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { createTestingPinia } from '@pinia/testing'
-import { createRouter, createMemoryHistory } from 'vue-router'
 import GenreRow from '@/components/shows/GenreRow.vue'
 import type { Show } from '@/types'
 
@@ -25,19 +24,11 @@ const makeShow = (id: number): Show => ({
   externals: null,
 })
 
-const router = createRouter({
-  history: createMemoryHistory(),
-  routes: [
-    { path: '/', component: { template: '<div />' } },
-    { path: '/show/:id', component: { template: '<div />' } },
-  ],
-})
-
 describe('GenreRow', () => {
   const mountRow = (genre: string, shows: Show[]) =>
     mount(GenreRow, {
       props: { genre, shows },
-      global: { plugins: [createTestingPinia({ createSpy: vi.fn }), router] },
+      global: { plugins: [createTestingPinia({ createSpy: vi.fn })] },
     })
 
   it('renders the genre name as a heading', () => {

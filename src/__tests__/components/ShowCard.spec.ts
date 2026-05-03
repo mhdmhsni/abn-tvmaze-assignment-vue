@@ -1,7 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
-import { mount, flushPromises } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { createTestingPinia } from '@pinia/testing'
-import { createRouter, createMemoryHistory } from 'vue-router'
 import ShowCard from '@/components/shows/ShowCard.vue'
 import type { Show } from '@/types'
 
@@ -18,19 +17,11 @@ const mockShow: Show = {
   webChannel: null,
 }
 
-const router = createRouter({
-  history: createMemoryHistory(),
-  routes: [
-    { path: '/', component: { template: '<div />' } },
-    { path: '/show/:id', component: { template: '<div />' } },
-  ],
-})
-
 describe('ShowCard', () => {
   const mountCard = (show: Show = mockShow) =>
     mount(ShowCard, {
       props: { show },
-      global: { plugins: [createTestingPinia({ createSpy: vi.fn }), router] },
+      global: { plugins: [createTestingPinia({ createSpy: vi.fn })] },
     })
 
   it('renders poster image with correct src', () => {
@@ -56,11 +47,15 @@ describe('ShowCard', () => {
     expect(wrapper.text()).toContain('9.2')
   })
 
-  it('navigates to show detail on click', async () => {
-    await router.isReady()
+  it('emits select with the show id on click', async () => {
     const wrapper = mountCard()
     await wrapper.trigger('click')
-    await flushPromises()
-    expect(router.currentRoute.value.path).toBe('/show/42')
+    expect(wrapper.emitted('select')).toEqual([[42]])
+  })
+
+  it('emits select with the show id on Enter key', async () => {
+    const wrapper = mountCard()
+    await wrapper.trigger('keydown.enter')
+    expect(wrapper.emitted('select')).toEqual([[42]])
   })
 })
