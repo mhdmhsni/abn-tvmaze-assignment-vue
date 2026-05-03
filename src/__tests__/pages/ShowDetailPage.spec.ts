@@ -76,7 +76,10 @@ describe('ShowDetailPage', () => {
     vi.spyOn(tvmazeApi, 'getShowById').mockReturnValue(new Promise(() => {}))
     await router.push('/show/1')
     const wrapper = mount(ShowDetailPage, { global: { plugins: [router] } })
-    expect(wrapper.find('.loading-spinner, [class*="spinner"]').exists() || wrapper.text().includes('Loading')).toBeTruthy()
+    expect(
+      wrapper.find('.loading-spinner, [class*="spinner"]').exists() ||
+        wrapper.text().includes('Loading'),
+    ).toBeTruthy()
   })
 
   it('renders show title after load', async () => {
@@ -133,7 +136,7 @@ describe('ShowDetailPage', () => {
 
   it('renders back button that navigates to /', async () => {
     const wrapper = await mountPage()
-    const backBtn = wrapper.find('.detail__back')
+    const backBtn = wrapper.find('.hero__back')
     expect(backBtn.exists()).toBe(true)
   })
 
@@ -146,7 +149,7 @@ describe('ShowDetailPage', () => {
 
   it('uses background image from images endpoint', async () => {
     const wrapper = await mountPage()
-    const hero = wrapper.find('.detail__hero')
+    const hero = wrapper.find('.hero')
     expect(hero.attributes('style')).toContain('https://example.com/bg.jpg')
   })
 

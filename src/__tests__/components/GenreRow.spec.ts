@@ -57,14 +57,20 @@ describe('GenreRow', () => {
   })
 
   it('renders left and right scroll buttons', () => {
-    const wrapper = mountRow('Drama', Array.from({ length: 5 }, (_, i) => makeShow(i + 1)))
+    const wrapper = mountRow(
+      'Drama',
+      Array.from({ length: 5 }, (_, i) => makeShow(i + 1)),
+    )
     expect(wrapper.find('[aria-label="Scroll left"]').exists()).toBe(true)
     expect(wrapper.find('[aria-label="Scroll right"]').exists()).toBe(true)
   })
 
   it('scroll buttons call scrollBy on the track element when clicked', async () => {
-    const wrapper = mountRow('Drama', Array.from({ length: 5 }, (_, i) => makeShow(i + 1)))
-    const track = wrapper.find('.genre-row__track').element as HTMLElement
+    const wrapper = mountRow(
+      'Drama',
+      Array.from({ length: 5 }, (_, i) => makeShow(i + 1)),
+    )
+    const track = wrapper.find('.h-scroller__track').element as HTMLElement
     // JSDOM doesn't implement scrollBy, so define it before spying
     const scrollBySpy = vi.fn()
     Object.defineProperty(track, 'scrollBy', { value: scrollBySpy, configurable: true })
