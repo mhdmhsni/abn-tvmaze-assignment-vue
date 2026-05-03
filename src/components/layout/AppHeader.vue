@@ -1,19 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useThemeStore } from '@/stores/theme'
+import SearchBar from '@/components/layout/SearchBar.vue'
 
 const themeStore = useThemeStore()
 const router = useRouter()
-const searchQuery = ref('')
 
-function submitSearch() {
-  const q = searchQuery.value.trim()
-  if (!q) {
-    router.push('/')
-    return
-  }
-  router.push({ path: '/search', query: { q } })
+function onSearch(query: string) {
+  router.push(query ? { path: '/search', query: { q: query } } : '/')
 }
 </script>
 
@@ -29,36 +23,7 @@ function submitSearch() {
         <span>TVGuide</span>
       </RouterLink>
 
-      <form class="header__search" role="search" @submit.prevent="submitSearch">
-        <svg
-          class="header__search-icon"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          aria-hidden="true"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
-        <input
-          v-model="searchQuery"
-          class="header__search-input"
-          type="search"
-          placeholder="Search and press Enter…"
-          aria-label="Search shows"
-        />
-        <button
-          v-if="searchQuery.trim()"
-          type="submit"
-          class="header__search-submit"
-          aria-label="Submit search"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-        </button>
-      </form>
+      <SearchBar @search="onSearch" />
 
       <button
         class="header__theme-btn"
@@ -149,71 +114,6 @@ function submitSearch() {
     &-icon {
       width: 28px;
       height: 28px;
-    }
-  }
-
-  &__search {
-    flex: 1;
-    min-width: 0;
-    max-width: 400px;
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-
-  &__search-icon {
-    position: absolute;
-    left: 14px;
-    width: 18px;
-    height: 18px;
-    color: var(--color-text-muted);
-    pointer-events: none;
-  }
-
-  &__search-input {
-    width: 100%;
-    height: 44px;
-    padding: 0 48px 0 42px;
-    border-radius: var(--radius-full);
-    border: 1px solid var(--color-border);
-    background: var(--color-bg);
-    color: var(--color-text);
-    font-size: var(--font-size-sm);
-    outline: none;
-    transition:
-      border-color var(--transition-fast),
-      box-shadow var(--transition-fast);
-
-    &::placeholder {
-      color: var(--color-text-muted);
-    }
-
-    &:focus {
-      border-color: var(--color-accent);
-      box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.15);
-    }
-  }
-
-  &__search-submit {
-    position: absolute;
-    right: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: var(--radius-full);
-    background: var(--color-accent);
-    color: #fff;
-    transition: background-color var(--transition-fast);
-
-    svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    &:hover {
-      background-color: var(--color-accent-hover);
     }
   }
 
