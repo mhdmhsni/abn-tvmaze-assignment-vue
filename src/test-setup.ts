@@ -6,4 +6,4 @@ class ResizeObserverMock {
   unobserve() {}
 }
 
-global.ResizeObserver = ResizeObserverMock
+globalThis.ResizeObserver = ResizeObserverMock
