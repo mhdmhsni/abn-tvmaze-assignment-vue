@@ -13,6 +13,11 @@ const router = createRouter({
       name: 'show-detail',
       component: () => import('@/pages/ShowDetailPage.vue'),
     },
+    {
+      path: '/search',
+      name: 'search',
+      component: () => import('@/pages/SearchResultsPage.vue'),
+    },
   ],
 })
 
