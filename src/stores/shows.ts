@@ -5,7 +5,6 @@ import type { FetchStatus, Show } from '@/types'
 
 export const useShowsStore = defineStore('shows', () => {
   const shows = ref<Show[]>([])
-  const currentPage = ref(0)
   const status = ref<FetchStatus>('idle')
   const hasMore = ref(true)
   const error = ref<string | null>(null)
@@ -33,18 +32,20 @@ export const useShowsStore = defineStore('shows', () => {
       .map(([genre]) => genre),
   )
 
-  async function fetchNextPage(): Promise<void> {
-    if (status.value === 'loading' || !hasMore.value) return
+  const canGoNext = computed(() => hasMore.value)
+
+  async function fetchPage(page: number): Promise<void> {
+    if (status.value === 'loading') return
     status.value = 'loading'
     error.value = null
 
     try {
-      const newShows = await getShows(currentPage.value)
+      const newShows = await getShows(page)
       if (newShows.length === 0) {
         hasMore.value = false
       } else {
-        shows.value.push(...newShows)
-        currentPage.value++
+        shows.value = newShows
+        hasMore.value = true
       }
       status.value = 'success'
     } catch (e) {
@@ -55,12 +56,12 @@ export const useShowsStore = defineStore('shows', () => {
 
   return {
     shows,
-    currentPage,
     status,
     hasMore,
     error,
     showsByGenre,
     sortedGenres,
-    fetchNextPage,
+    canGoNext,
+    fetchPage,
   }
 })
