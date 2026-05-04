@@ -45,10 +45,10 @@ The repo ships with an `.nvmrc` (set to `lts/krypton`, Node 24). Pinning the Nod
 ```bash
 nvm use        # picks up .nvmrc automatically
 node -v        # should print v24.x.x
-npm -v         # bundled with Node 24
+npm -v         # ≥ 10.0.0 required (current: 11.x bundled with Node 24)
 ```
 
-Minimum supported: **Node ≥ 20.19 or ≥ 22.12** (see `engines` in `package.json`).
+Minimum supported: **Node ≥ 20.19 or ≥ 22.12** and **npm ≥ 10** (see `engines` in `package.json`).
 
 ---
 
