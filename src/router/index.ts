@@ -18,6 +18,11 @@ const router = createRouter({
       name: 'search',
       component: () => import('@/pages/SearchResultsPage.vue'),
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('@/pages/NotFoundPage.vue'),
+    },
   ],
 })
 
