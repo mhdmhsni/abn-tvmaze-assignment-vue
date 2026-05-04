@@ -73,7 +73,6 @@ function onSearch(query: string) {
   top: 0;
   left: 0;
   right: 0;
-  height: var(--header-height);
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   box-shadow: 0 1px 8px var(--color-shadow);
@@ -85,12 +84,29 @@ function onSearch(query: string) {
   &__inner {
     max-width: var(--container-max);
     margin: 0 auto;
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 12px;
     padding: 0 var(--page-padding);
+    height: var(--header-height);
+
+    // On very small screens wrap into two rows:
+    // row 1 → logo + theme button, row 2 → search bar
+    @media (max-width: 359px) {
+      flex-wrap: wrap;
+      height: auto;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      gap: 8px;
+
+      // Make the search bar span the full width in the second row
+      :deep(.search-bar) {
+        flex-basis: 100%;
+        max-width: 100%;
+        order: 1;
+      }
+    }
   }
 
   &__logo {
