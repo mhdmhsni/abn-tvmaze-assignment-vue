@@ -10,10 +10,15 @@ const scheduleLabel = computed(() => {
   const days = s.days.join(', ')
   return days && s.time ? `${days} at ${s.time}` : days || s.time || null
 })
+
+const networkLabel = computed(
+  () => props.show.network?.name ?? props.show.webChannel?.name ?? null,
+)
 </script>
 
 <template>
   <section class="meta-bar">
+    <span v-if="networkLabel" class="meta-bar__item">{{ networkLabel }}</span>
     <span v-if="show.language" class="meta-bar__item">{{ show.language }}</span>
     <span v-if="show.runtime" class="meta-bar__item">{{ show.runtime }} min</span>
     <span v-if="show.type" class="meta-bar__item">{{ show.type }}</span>
@@ -28,6 +33,14 @@ const scheduleLabel = computed(() => {
       rel="noopener noreferrer"
       class="meta-bar__link"
       >Official site</a
+    >
+    <a
+      v-if="show.externals?.imdb"
+      :href="`https://www.imdb.com/title/${show.externals.imdb}/`"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="meta-bar__link"
+      >IMDb</a
     >
   </section>
 </template>

@@ -28,6 +28,12 @@ const heroImage = computed(() => {
   return show.value?.image?.original ?? null
 })
 
+/** Strip HTML tags from the API summary so we never inject raw HTML into the DOM. */
+const plainSummary = computed(() => {
+  if (!show.value?.summary) return null
+  return show.value.summary.replace(/<[^>]*>/g, '').trim()
+})
+
 onMounted(async () => {
   try {
     const [fetchedShow, fetchedCast, fetchedSeasons, fetchedImages] = await Promise.all([
@@ -57,6 +63,12 @@ onMounted(async () => {
 
     <template v-else-if="show">
       <ShowMetaBar :show="show" />
+
+      <!-- Summary -->
+      <section v-if="plainSummary" class="detail__section">
+        <h2 class="detail__section-title">About</h2>
+        <p class="detail__summary">{{ plainSummary }}</p>
+      </section>
 
       <!-- Cast -->
       <section v-if="cast.length > 0" class="detail__section">
@@ -101,6 +113,14 @@ onMounted(async () => {
     @include respond-to('md') {
       font-size: var(--font-size-2xl);
     }
+  }
+
+  &__summary {
+    padding: 0 var(--page-padding);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+    max-width: 48rem;
   }
 
   &__seasons-grid {

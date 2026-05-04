@@ -12,7 +12,7 @@ const mockShow: Show = {
   status: 'Ended',
   rating: { average: 9.5 },
   image: { medium: 'https://example.com/med.jpg', original: 'https://example.com/orig.jpg' },
-  summary: null,
+  summary: '<p>A high school chemistry teacher turned drug kingpin. <b>Gripping</b> drama.</p>',
   premiered: '2008-01-20',
   ended: '2013-09-29',
   network: { name: 'AMC' },
@@ -138,6 +138,12 @@ describe('ShowDetailPage', () => {
     const wrapper = await mountPage()
     const backBtn = wrapper.find('.hero__back')
     expect(backBtn.exists()).toBe(true)
+  })
+
+  it('renders show summary as plain text without HTML tags', async () => {
+    const wrapper = await mountPage()
+    expect(wrapper.text()).toContain('A high school chemistry teacher turned drug kingpin.')
+    expect(wrapper.html()).not.toContain('<b>Gripping</b>')
   })
 
   it('does not use v-html anywhere', async () => {

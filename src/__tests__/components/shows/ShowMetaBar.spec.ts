@@ -63,4 +63,32 @@ describe('ShowMetaBar', () => {
       false,
     )
   })
+
+  it('renders network name', () => {
+    expect(mountBar({ ...mockShow, network: { name: 'AMC' } }).text()).toContain('AMC')
+  })
+
+  it('falls back to webChannel name when network is null', () => {
+    const show = { ...mockShow, network: null, webChannel: { name: 'Netflix' } }
+    expect(mountBar(show).text()).toContain('Netflix')
+  })
+
+  it('does not render network item when both network and webChannel are null', () => {
+    const show = { ...mockShow, network: null, webChannel: null }
+    expect(mountBar(show).text()).not.toContain('AMC')
+  })
+
+  it('renders IMDb link with correct href', () => {
+    const show = { ...mockShow, externals: { tvrage: null, thetvdb: null, imdb: 'tt0903747' } }
+    const link = mountBar(show).find('a[href="https://www.imdb.com/title/tt0903747/"]')
+    expect(link.exists()).toBe(true)
+    expect(link.text()).toBe('IMDb')
+    expect(link.attributes('target')).toBe('_blank')
+    expect(link.attributes('rel')).toBe('noopener noreferrer')
+  })
+
+  it('does not render IMDb link when imdb is null', () => {
+    const show = { ...mockShow, externals: { tvrage: null, thetvdb: null, imdb: null } }
+    expect(mountBar(show).find('a[href*="imdb.com"]').exists()).toBe(false)
+  })
 })
